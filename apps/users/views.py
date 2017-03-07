@@ -1,9 +1,9 @@
 # _*_ encoding:utf-8 _*_
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.hashers import make_password
 from django.db.models import Q
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic.base import View
 
@@ -57,6 +57,14 @@ class LoginView(View):
         else:
             # 格式验证未通过。login_form 返回错误信息
             return render(request, 'login.html', {'login_form': login_form})
+
+
+# 退出登录
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        from django.core.urlresolvers import reverse
+        return HttpResponseRedirect(reverse('index'))
 
 
 # 激活页

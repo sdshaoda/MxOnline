@@ -5,7 +5,7 @@ from django.views.static import serve
 
 import xadmin
 from MxOnline.settings import MEDIA_ROOT
-from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetUserView, ModifyPwdView
+from users.views import LoginView, LogoutView, RegisterView, ActiveUserView, ForgetPwdView, ResetUserView, ModifyPwdView
 
 urlpatterns = [
     # 后台管理系统，使用了 xadmin
@@ -17,8 +17,10 @@ urlpatterns = [
     # 文件上传
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
 
-    # 用户登录
+    # 登录
     url(r'^login/$', LoginView.as_view(), name='login'),
+    # 退出
+    url(r'^logout/$', LogoutView.as_view(), name='logout'),
     # 注册
     url(r'^register/$', RegisterView.as_view(), name='register'),
     # 激活。取 URL 中的字符， active_code 将作为参数传递到 ActiveUserView
