@@ -147,7 +147,7 @@ STATICFILES_DIRS = (
 EMAIL_HOST = 'smtp.126.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'sdshaoda@126.com'
-EMAIL_HOST_PASSWORD = 'SD shaoda'
+EMAIL_HOST_PASSWORD = 'SDshaoda'
 EMAIL_USE_TLS = False
 EMAIL_FROM = 'sdshaoda@126.com'
 

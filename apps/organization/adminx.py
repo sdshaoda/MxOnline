@@ -1,7 +1,4 @@
 # _*_ coding:utf-8 _*_
-__author__ = 'shaoda'
-__date__ = '2017/2/21 14:30'
-
 import xadmin
 
 from .models import CityDict, CourseOrg, Teacher

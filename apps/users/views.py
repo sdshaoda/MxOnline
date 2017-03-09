@@ -62,6 +62,7 @@ class LoginView(View):
 # 退出登录
 class LogoutView(View):
     def get(self, request):
+        # Django 自带的登出功能
         logout(request)
         from django.core.urlresolvers import reverse
         return HttpResponseRedirect(reverse('index'))
@@ -113,7 +114,8 @@ class RegisterView(View):
             user_profile.username = user_name
             user_profile.email = user_name
             # 设置用户为未激活状态
-            user_profile.is_active = False
+            # user_profile.is_active = False
+            user_profile.is_active = True
             # 要对密码进行加密保存
             user_profile.password = make_password(pass_word)
             user_profile.save()
