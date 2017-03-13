@@ -1,4 +1,4 @@
-# _*_ coding:utf-8 _*_
+# coding:utf-8
 from random import Random
 
 from django.core.mail import send_mail

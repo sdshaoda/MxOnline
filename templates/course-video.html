@@ -69,8 +69,8 @@
                         <div class="mod-tab-menu">
                             <ul class="course-menu clearfix">
                                 <li><a class="ui-tabs-active active" id="learnOn"
-                                       href="course-video.html"><span>章节</span></a></li>
-                                <li><a id="commentOn" class="" href="course-comment.html"><span>评论</span></a></li>
+                                       href="{% url 'course:course_info' course.id %}"><span>章节</span></a></li>
+                                <li><a id="commentOn" class="" href="{% url 'course:course_comment' course.id %}"><span>评论</span></a></li>
                             </ul>
                         </div>
                         <div id="notice" class="clearfix">
@@ -112,11 +112,12 @@
                                 <ul class="downlist">
 
                                     {% for resorce in all_resources %}
-                                    <li>
-                                        <span><i class="aui-iconfont aui-icon-file"></i>&nbsp;&nbsp;{{ resorce.name }}</span>
-                                        <a href="{{ MEDIA_URL }}{{ resorce.download }}" class="downcode"
-                                           target="_blank" download="" data-id="274" title="">下载</a>
-                                    </li>
+                                        <li>
+                                            <span><i
+                                                    class="aui-iconfont aui-icon-file"></i>&nbsp;&nbsp;{{ resorce.name }}</span>
+                                            <a href="{{ MEDIA_URL }}{{ resorce.download }}" class="downcode"
+                                               target="_blank" download="" data-id="274" title="">下载</a>
+                                        </li>
                                     {% endfor %}
 
                                 </ul>

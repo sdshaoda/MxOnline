@@ -1,4 +1,4 @@
-# _*_ encoding:utf-8 _*_
+# coding:utf-8
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.hashers import make_password

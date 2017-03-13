@@ -1,9 +1,10 @@
-# _*_ coding:utf-8 _*_
+# coding:utf-8
 from django.shortcuts import render
 from django.views.generic.base import View
+from django.http import HttpResponse
 from pure_pagination import Paginator, PageNotAnInteger
 
-from operation.models import UserFavorite
+from operation.models import UserFavorite, CourseComments
 from .models import Course, CourseResource
 
 
@@ -78,3 +79,38 @@ class CourseInfoView(View):
             'course': course,
             'all_resources': all_resources
         })
+
+
+# 课程评论
+class CommentsView(View):
+    def get(self, request, course_id):
+        course = Course.objects.get(id=int(course_id))
+        all_resources = CourseResource.objects.filter(course=course)
+        all_comments = CourseComments.objects.all()
+        return render(request, 'course-comment.html', {
+            'course': course,
+            'all_comments': all_comments
+        })
+
+
+# 添加课程评论
+class AddCommentsView(View):
+    def post(self, request):
+        if not request.user.is_authenticated():
+            # 用户未登录
+            return HttpResponse('{"status":"fail","msg":"用户未登录"}', content_type='application/json')
+
+        course_id = request.POST.get('course_id', 0)
+        comments = request.POST.get('comments', '')
+        if course_id > 0 and comments:
+            course_comments = CourseComments()
+            course = Course.objects.get(id=int(course_id))
+            course_comments.course = course
+            course_comments.comments = comments
+            course_comments.user = request.user
+            course_comments.save()
+
+            return HttpResponse('{"status":"success","msg":"评论成功"}', content_type='application/json')
+        else:
+            return HttpResponse('{"status":"fail","msg":"评论失败"}', content_type='application/json')
+

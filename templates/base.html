@@ -15,10 +15,7 @@
     {% block top_js %}{% endblock %}
 </head>
 <body>
-{#index.html#}
-{#org-list.html#}
-{#course-list.html#}
-{#teacher-list.html#}
+
 {#顶部#}
 <section class="headerwrap ">
     <header>
@@ -99,7 +96,7 @@
                             {% endblock %}
                             {% block nav_teacher %}
                                 <li>
-                                    {#                                <a href="{% url 'teacher:teacher_list' %}">授课教师</a>#}
+                                    {#<a href="{% url 'teacher:teacher_list' %}">授课教师</a>#}
                                 </li>
                             {% endblock %}
                             {% block nav_org %}
@@ -118,8 +115,7 @@
 {% block custom_crumbs %}{% endblock %}
 
 {#主体内容#}
-{% block content %}
-{% endblock %}
+{% block content %}{% endblock %}
 
 {#底部#}
 <footer>
@@ -133,7 +129,6 @@
                     <p class="tell">33333333</p>
                     <p class="time">周一至周日 9:00-18:00</p></li>
             </ul>
-
         </div>
         <p class="line"></p>
         <div class="wp clear">
@@ -160,6 +155,8 @@
 <script src="/static/js/unslider.js" type="text/javascript"></script>
 <script src="/static/js/plugins/jquery.scrollLoading.js" type="text/javascript"></script>
 <script src="/static/js/deco-common.js" type="text/javascript"></script>
+
 {% block bottom_js %}{% endblock %}
+
 </body>
 </html>
