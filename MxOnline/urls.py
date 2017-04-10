@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 
 import xadmin
-from MxOnline.settings import MEDIA_ROOT
+from MxOnline.settings import MEDIA_ROOT, STATIC_ROOT
 from users.views import LoginView, LogoutView, RegisterView, ActiveUserView, ForgetPwdView, ResetUserView, ModifyPwdView
 
 urlpatterns = [
@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^captcha/', include('captcha.urls')),
     # 文件上传
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
+    url(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}),
 
     # 登录
     url(r'^login/$', LoginView.as_view(), name='login'),
@@ -37,3 +38,8 @@ urlpatterns = [
     # 课程相关 URL
     url(r'^course/', include('courses.urls', namespace='course')),
 ]
+
+# 全局 404 页面
+handler404 = 'users.views.page_not_found'
+# 全局 500 页面
+handler500 = 'users.views.page_error'

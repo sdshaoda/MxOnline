@@ -1,7 +1,8 @@
 # coding:utf-8
+from django.db.models import Q
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic.base import View
-from django.http import HttpResponse
 from pure_pagination import Paginator, PageNotAnInteger
 
 from operation.models import UserFavorite, CourseComments
@@ -12,6 +13,13 @@ class CourseListView(View):
     def get(self, request):
         all_courses = Course.objects.all().order_by('-add_time')
         hot_courses = Course.objects.all().order_by('-click_nums')[:3]
+
+        # 搜索
+        search_keywords = request.GET.get('keywords', '')
+        if search_keywords:
+            all_courses = all_courses.filter(Q(name__icontains=search_keywords) |
+                                             Q(desc__icontains=search_keywords) |
+                                             Q(detail__icontains=search_keywords))
 
         # 课程排序
         sort = request.GET.get('sort', '')
@@ -113,4 +121,3 @@ class AddCommentsView(View):
             return HttpResponse('{"status":"success","msg":"评论成功"}', content_type='application/json')
         else:
             return HttpResponse('{"status":"fail","msg":"评论失败"}', content_type='application/json')
-
